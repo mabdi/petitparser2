@@ -33,8 +33,15 @@ PP2ParsingGuardTest >> testParseOnFailure [
 	| parser context guard |
 	parser := #letter asPParser.
 	guard := self guardOn: parser.
+	self assert: guard class equals: PP2ParsingGuard.
+	self assert: guard classification class equals: Array.
+	self assert: guard classification size equals: 128.
+	self assert: guard retval class equals: PP2Failure.
+	self deny: guard retval isPetit2Success.
+	self assert: guard retval isPetit2Failure.
+	self assert: guard retval message equals: 'ooups'.
+	self assert: guard retval position equals: 0.
 	context := '1' asPetit2Stream asPetit2Context.
-	
 	self assert: (guard parseOn: context) isPetit2Failure
 ]
 

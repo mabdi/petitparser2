@@ -21,7 +21,19 @@ PP2NoopVisitorTest >> testVisitCharacter [
 	parser := $a asPParser.
 	result := visitor visit: parser.
 	
-	self assert: result equals: visitor
+	self assert: result equals: visitor.
+	self assert: visitor class equals: PP2MockNoopVisitor.
+	self deny: visitor isRoot.
+	self assert: visitor visitOrder class equals: OrderedCollection.
+	self assert: visitor visitOrder size equals: 1.
+	self
+		assert: (visitor visitOrder at: 1) class
+		equals: PP2LiteralObjectNode.
+	self assert: (visitor visitOrder at: 1) literal equals: $a.
+	self
+		assert: (visitor visitOrder at: 1) message
+		equals: 'literal $a expected'.
+	self assert: visitor currentContext class equals: PP2NoopContext
 ]
 
 { #category : #'as yet unclassified' }

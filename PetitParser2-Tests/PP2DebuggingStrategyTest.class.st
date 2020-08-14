@@ -30,11 +30,19 @@ PP2DebuggingStrategyTest >> testCache [
 { #category : #tests }
 PP2DebuggingStrategyTest >> testDebug [
 	| debugStrategy |
-
 	debugStrategy := strategy debug.
-	
 	self assert: debugStrategy debug == debugStrategy.
-	
+	self assert: debugStrategy class equals: PP2DebuggingStrategy.
+	self assert: debugStrategy isDebugging.
+	self
+		assert: debugStrategy withoutDebugStrategy class
+		equals: PP2LiteralObject.
+	self
+		assert: debugStrategy withoutDebugStrategy node class
+		equals: PP2LiteralObjectNode.
+	self
+		assert: debugStrategy withoutDebugStrategy node literal
+		equals: $a
 ]
 
 { #category : #tests }
