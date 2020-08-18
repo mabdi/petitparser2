@@ -20,7 +20,14 @@ PP2NoopVisitorTest >> setUp [
 PP2NoopVisitorTest >> testVisitCharacter [
 	parser := $a asPParser.
 	result := visitor visit: parser.
-	
+	self assert: visitor visitOrder size equals: 1.
+	self
+		assert: (visitor visitOrder at: 1) class
+		equals: PP2LiteralObjectNode.
+	self assert: (visitor visitOrder at: 1) literal equals: $a.
+	self
+		assert: (visitor visitOrder at: 1) message
+		equals: 'literal $a expected'.
 	self assert: result equals: visitor
 ]
 
