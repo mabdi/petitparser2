@@ -74,3 +74,18 @@ PP2DebuggingStrategyTest >> testRecognizer [
 	self assert: debugStrategy strategy isKindOf: PP2PredicateObjectRecognizer.
 	
 ]
+
+{ #category : #tests }
+PP2DebuggingStrategyTest >> testWithoutDebugStrategy [
+	| debugStrategy |
+	debugStrategy := strategy debug.
+	self
+		assert: debugStrategy withoutDebugStrategy class
+		equals: PP2LiteralObject.
+	self
+		assert: debugStrategy withoutDebugStrategy node class
+		equals: PP2LiteralObjectNode.
+	self
+		assert: debugStrategy withoutDebugStrategy node literal
+		equals: $a
+]
